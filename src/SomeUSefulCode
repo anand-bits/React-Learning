@@ -1,0 +1,61 @@
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+
+// CSS styles directly within the React component
+const styles = `
+  button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #2980b9;
+  }
+
+  div {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+`;
+
+function Button(props) {
+  return (
+    <button onClick={() => props.onClickFunction(props.increment)}>
+      {+props.increment}
+    </button>
+  );
+}
+
+function Display(props) {
+  return <div>{props.message}</div>;
+}
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  const increment = (incrementValue) => {
+    setCount(count + incrementValue);
+  };
+
+  return (
+    <div>
+      <style>{styles}</style>
+      <Button onClickFunction={increment} increment={1} />
+      <Button onClickFunction={increment} increment={5} />
+      <Button onClickFunction={increment} increment={10} />
+      <Button onClickFunction={increment} increment={50} />
+      <Button onClickFunction={increment} increment={1000} />
+
+      <Display message={count} />
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('mountNode'));
